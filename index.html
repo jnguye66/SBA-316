@@ -13,17 +13,19 @@
     <h1>Honkai: Star Rail Character Builder</h1>
     <div style="display: flex; flex-wrap: wrap;">
         <div style="display: block; width: 230px;">
+
+            <!-- Character Form -->
             <form id="character">
                 <h2>Character Options</h2>
-                <label for="character-select" style="text-decoration: underline">Character:</label>
-                <select name="character-select" id="character-select" style="width: 200px;">
+                <label for="character-select" style="text-decoration: underline;">Character:</label>
+                <select name="character-select" id="character-select" style="width: 200px; margin-bottom: 8px;">
                     <option value="" disabled selected>Select a Character</option>
                     <option value="acheron">Acheron</option>
                     <option value="black-swan">Black Swan</option>
                     <option value="kafka">Kafka</option>
                 </select>
 
-                <label for="light-cone-select" style="text-decoration: underline">Light Cone:</label>
+                <label for="light-cone-select" style="text-decoration: underline;">Light Cone:</label>
                 <select name="light-cone-select" id="light-cone-select" style="width: 200px;">
                     <option value="" disabled selected>Select a Light Cone</option>
                     <option value="acheron-lc">Along the Passing Shore</option>
@@ -45,23 +47,15 @@
                     <option value="e6">E6</option>
                 </select>
                 <br>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" style="margin-top:25px;">
             </form>
         </div>
+
+        <!-- Relic Set Form -->
         <form id="relics">
-            <h2>Relic & Stat Options</h2>
+            <h2>Relic & Stats Options</h2>
             <div style="display: block; width: 230px;">
                 <div id="main-stats">
-                    <label for="head" style="text-decoration: underline">Headpiece:</label>
-                    <select name="head" id="head" style="width: 200px;">
-                        <option value="" disabled selected>Flat HP</option>
-                    </select>
-
-                    <label for="hands" style="text-decoration: underline">Hands:</label>
-                    <select name="hands" id="hands" style="width: 200px;">
-                        <option value="" disabled selected>Flat ATK</option>
-                    </select>
-
                     <label for="chest" style="text-decoration: underline">Chest:</label>
                     <select name="chest" id="chest" style="width: 200px;">
                         <option value="" disabled selected>Select a Main Stat</option>
@@ -109,10 +103,12 @@
                     </select>
                 </div>
             </div>
+            <input type="submit" value="Submit" style="margin-top:25px;">
         </form>
     </div>
-    <form id="output">
-    </form>
+
+    <!-- Output Form -->
+    <form id="output"></form>
 
     <!-- Displays Errors -->
     <div id="errorDisplay"></div>

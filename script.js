@@ -9,8 +9,6 @@ const charEidolon = charForm.elements[3];
 // Relic and Stat Option Validation
 const relicForm = document.getElementById("relics");
 //console.log(relicForm.elements)
-const relicHead = relicForm.elements[0];
-const relicHands = relicForm.elements[1];
 const relicChest = relicForm.elements[2];
 const relicFeet = relicForm.elements[3];
 const relicSphere = relicForm.elements[4];
@@ -20,10 +18,12 @@ let arrCharInfo = []; // Array to hold character objects
 
 // Both validate functions go off of same submit press
 charForm.addEventListener("submit", charValidate); // Character validate
-//relicForm.addEventListener("submit", relicValidate); // Relic validate
+relicForm.addEventListener("submit", relicValidate); // Relic validate
 
 ////////////////////////////////////////////////////////////////////////
 // Validate Functions
+
+// Character Validate
 function charValidate(evt) {
     evt.preventDefault();
 
@@ -56,15 +56,35 @@ function charValidate(evt) {
         charInfoObj.level = charLevelValidate();
     }
 
+    // Character Eidolon Validation
+    const charEidolon = charEidolonValidate();
+    if (charEidolon === false) {
+        evt.returnValue = false;
+        return false;
+    } else {
+        charInfoObj.eidolon = charEidolonValidate();
+    }
+
     console.log(charInfoObj);
     arrCharInfo.push(charInfoObj); // Push Character Object into Character Info Array
     console.log(arrCharInfo);
 }
 
-// function relicValidate(evt) {
-//     evt.preventDefault();
+// Relic Set Validate
+function relicValidate(evt) {
+    evt.preventDefault();
 
-// }
+    let charRelicSetInfo = {}; // Character Object Information
+
+    // Relic Chest Validation
+    const relicChest = relChestValidate();
+    if (relicChest === false) {
+        evt.returnValue = false;
+        return false;
+    } else {
+        charRelicSetInfo.chest = relChestValidate();
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////
 // Charater Options Validate Functions
@@ -104,7 +124,7 @@ function charLevelValidate() {
         charLevel.focus();
         return false;
     } else if (parseInt(charLevel.value) > 80) {
-        alert("Max level is 80.");
+        alert("Maximum level is 80.");
         charLevel.focus();
         return false;
     } else if (parseInt(charLevel.value) <= 0){
@@ -121,6 +141,38 @@ function charEidolonValidate() {
     let output = selectedElement.options[selectedElement.selectedIndex].value;
 
     return output;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Relic Options Validate Functions
+
+// Relic Chest Validate
+function relChestValidate() {
+    let selectedElement = relicChest;
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
+
+    if (output === ''){
+        alert("Please select a chest main stat.");
+        charLevel.focus();
+        return false;
+    }
+
+    return output;
+}
+
+// Relic Feet Validate
+function relFeetValidate() {
+    
+}
+
+// Relic Sphere Validate
+function relSphereValidate() {
+    
+}
+
+// Relic Rope Validate
+function relRopeValidate() {
+    
 }
 
 ////////////////////////////////////////////////////////////////////////

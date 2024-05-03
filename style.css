@@ -2,6 +2,14 @@ html * {
     font-family: sans-serif;
 }
 
+select {
+    margin-bottom: 8px;
+}
+
+#level {
+    margin-bottom: 8px;
+}
+
 #errorDisplay {
     position: absolute;
     background: #fcc;
