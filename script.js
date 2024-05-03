@@ -38,12 +38,13 @@ function charValidate(evt) {
         charInfoObj.character = charSelectValidate();
     }
 
+    // Light Cone Selection Validation
     const lightConeVal = lightConeSelectValidate();
     if (lightConeVal === false) {
         evt.returnValue = false;
         return false;
     } else {
-        charInfoObj.lightCone = lightConeSelectValidate();
+        charInfoObj.lightCone = lightConeSelectValidate().toLowerCase();
     }
 
     // Character Level Validation
@@ -81,15 +82,11 @@ function charSelectValidate() {
 
     return output;
 }
-// let selectedElement = document.getElementById('character-select'); Grabs character-select 
-// let output = selectedElement.options[1].value; // grabs option 1
-// console.log(selectedElement) // Logs character-select 
-// console.log(output) // Outputs option 1's value, which is acheron
 
 // Light Cone Selection Validate
 function lightConeSelectValidate(){
     let selectedElement = charLightCone;
-    let output = selectedElement.options[selectedElement.selectedIndex].value;
+    let output = selectedElement.options[selectedElement.selectedIndex].textContent;
 
     if (output === ''){
         alert("Please select a light cone.");
@@ -100,23 +97,30 @@ function lightConeSelectValidate(){
     return output;
 }
 
-
-// Char Level Validate
+// Character Level Validate
 function charLevelValidate() {
     if (charLevel.value === ""){
         alert("Please enter your characters level");
         charLevel.focus();
         return false;
-    } else if (charLevel.value.parseInt > 80) {
+    } else if (parseInt(charLevel.value) > 80) {
         alert("Max level is 80.");
         charLevel.focus();
         return false;
-    } else if (charLevel.value.parseInt <= 0){
+    } else if (parseInt(charLevel.value) <= 0){
         alert("Minimum level is 1.");
         charLevel.focus();
         return false;
     }
     return charLevel.value;
+}
+
+// Character Eidolon Validate
+function charEidolonValidate() {
+    let selectedElement = charEidolon;
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
+
+    return output;
 }
 
 ////////////////////////////////////////////////////////////////////////
