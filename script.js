@@ -1,18 +1,20 @@
 // Character Option Validation
 const charForm = document.getElementById("character");
-const charCharacter = charForm.elements["character-select"];
-const charLightCone = charForm.elements["light-cone-select"];
-const charLevel = charForm.elements["level"];
-const charEidolon = charForm.elements["eidolon"];
+// console.log(charForm.elements)
+const charCharacter = charForm.elements[0];
+const charLightCone = charForm.elements[1];
+const charLevel = charForm.elements[2];
+const charEidolon = charForm.elements[3];
 
 // Relic and Stat Option Validation
 const relicForm = document.getElementById("relics");
-const relicHead = relicForm.elements["head"];
-const relicHands = relicForm.elements["hands"];
-const relicChest = relicForm.elements["chest"];
-const relicFeet = relicForm.elements["feet"];
-const relicSphere = relicForm.elements["sphere"];
-const relicRope = relicForm.elements["rope"];
+//console.log(relicForm.elements)
+const relicHead = relicForm.elements["#head"];
+const relicHands = relicForm.elements["#hands"];
+const relicChest = relicForm.elements["#chest"];
+const relicFeet = relicForm.elements["#feet"];
+const relicSphere = relicForm.elements["#sphere"];
+const relicRope = relicForm.elements["#rope"];
 
 let arrCharInfo = []; // Array to hold character objects
 
@@ -29,13 +31,14 @@ function charValidate(evt) {
 
     // Character Selection Validation
     const charVal = charSelectValidate();
-    console.log(charVal);
+    console.log(charVal)
     if (charVal === false) {
         evt.returnValue = false;
         return false;
     } else {
         charInfoObj.character = charSelectValidate();
     }
+
 
     // Character Level Validation
     const charLvl = charLevelValidate();
@@ -46,6 +49,7 @@ function charValidate(evt) {
         charInfoObj.level = charLevelValidate();
     }
 
+    console.log(charInfoObj);
     arrCharInfo.push(charInfoObj); // Push Character Object into Character Info Array
     console.log(arrCharInfo);
 }
@@ -56,17 +60,21 @@ function charValidate(evt) {
 // }
 
 ////////////////////////////////////////////////////////////////////////
-// Individual Option Validate Functions
+// Charater Options Validate Functions
 
-// Char Selection Validate
+// Character Selection Validate
 function charSelectValidate() {
-    if (charCharacter.value === "") {
-        alert("Please choose a character.");
-        charCharacter.focus();
-        return false;
-    }
-    return charCharacter.value;
+    let selectedElement = document.getElementById('character-select');
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
+
+    return output;
 }
+// let selectedElement = document.getElementById('character-select'); Grabs character-select 
+// let output = selectedElement.options[1].value; // grabs option 1
+// console.log(selectedElement) // Logs character-select 
+// console.log(output) // Outputs option 1's value, which is acheron
+
+
 
 
 // Char Level Validate
@@ -86,6 +94,8 @@ function charLevelValidate() {
     }
     return charLevel.value;
 }
+
+////////////////////////////////////////////////////////////////////////
 
 // Alert Message Function
 function alert(msg) {

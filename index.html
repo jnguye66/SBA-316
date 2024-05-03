@@ -12,8 +12,8 @@
 <body>
     <h1>Honkai: Star Rail Character Builder</h1>
     <div style="display: flex; flex-wrap: wrap;">
-        <form id="character">
-            <div id="character-options" display="flex">
+        <div style="display: block; width: 230px;">
+            <form id="character">
                 <h2>Character Options</h2>
                 <label for="character-select" style="text-decoration: underline">Character:</label>
                 <select name="character-select" id="character-select" style="width: 200px;">
@@ -22,8 +22,7 @@
                     <option value="black-swan"> Black Swan </option>
                     <option value="kafka"> Kafka </option>
                 </select>
-            </div>
-            <div id="light-cone-options">
+
                 <label for="light-cone-select" style="text-decoration: underline">Light Cone:</label>
                 <select name="light-cone-select" id="light-cone-select" style="width: 200px;">
                     <option value="" disabled selected>Select a Light Cone</option>
@@ -31,12 +30,10 @@
                     <option value="black-swan-lc"> Reforged Remembrance </option>
                     <option value="kafka-lc"> Patience is All You Need </option>
                 </select>
-            </div>
-            <div id="character-level">
+
                 <label for="level" style="text-decoration: underline">Level:</label>
-                <input type="text" id="level" name="level" style="width: 200px;">
-            </div>
-            <div id="character-eidolon">
+                <input type="text" id="level" name="level" style="width: 192px;">
+
                 <label for="eidolon" style="text-decoration: underline">Eidolon:</label>
                 <select name="eidolon" id="eidolon" style="width: 42px;">
                     <option value="e0">E0</option>
@@ -47,24 +44,24 @@
                     <option value="e5">E5</option>
                     <option value="e6">E6</option>
                 </select>
-            </div>
-        </form>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
         <form id="relics">
             <h2>Relic & Stat Options</h2>
-            <div id="main-stats">
-                <div class="head">
+            <div style="display: block; width: 230px;">
+                <div id="main-stats">
                     <label for="head" style="text-decoration: underline">Headpiece:</label>
                     <select name="head" id="head" style="width: 200px;">
                         <option value="" disabled selected>Flat HP</option>
                     </select>
-                </div>
-                <div class="hands">
+
                     <label for="hands" style="text-decoration: underline">Hands:</label>
                     <select name="hands" id="hands" style="width: 200px;">
                         <option value="" disabled selected>Flat ATK</option>
                     </select>
-                </div>
-                <div class="chest">
+
                     <label for="chest" style="text-decoration: underline">Chest:</label>
                     <select name="chest" id="chest" style="width: 200px;">
                         <option value="" disabled selected>Select a Main Stat</option>
@@ -76,8 +73,7 @@
                         <option value="be%">Break Effect</option>
                         <option value="eff%">Effect Hit Rate</option>
                     </select>
-                </div>
-                <div class="feet">
+
                     <label for="feet" style="text-decoration: underline">Feet:</label>
                     <select name="feet" id="feet" style="width: 200px;">
                         <option value="" disabled selected>Select a Main Stat</option>
@@ -86,8 +82,7 @@
                         <option value="hp%">HP%</option>
                         <option value="spd">Speed</option>
                     </select>
-                </div>
-                <div class="sphere">
+
                     <label for="sphere" style="text-decoration: underline">Sphere:</label>
                     <select name="sphere" id="sphere" style="width: 200px;">
                         <option value="" disabled selected>Select a Main Stat</option>
@@ -102,8 +97,7 @@
                         <option value="quan%">Quantum DMG Bonus%</option>
                         <option value="imag%">Imaginary DMG Bonus%</option>
                     </select>
-                </div>
-                <div class="rope">
+
                     <label for="rope" style="text-decoration: underline">Rope:</label>
                     <select name="rope" id="rope" style="width: 200px;">
                         <option value="" disabled selected>Select a Main Stat</option>
@@ -117,9 +111,11 @@
             </div>
         </form>
     </div>
-    <input type="submit" value="Submit" name="character-submit">
     <form id="output">
     </form>
+
+    <!-- Displays Errors -->
+    <div id="errorDisplay"></div>
 </body>
 
 </html>
