@@ -9,12 +9,13 @@ const charEidolon = charForm.elements[3];
 // Relic and Stat Option Validation
 const relicForm = document.getElementById("relics");
 //console.log(relicForm.elements)
-const relicChest = relicForm.elements[2];
-const relicFeet = relicForm.elements[3];
-const relicSphere = relicForm.elements[4];
-const relicRope = relicForm.elements[5];
+const relicChest = relicForm.elements[0];
+const relicFeet = relicForm.elements[1];
+const relicSphere = relicForm.elements[2];
+const relicRope = relicForm.elements[3];
 
-let arrCharInfo = []; // Array to hold character objects
+let arrCharacters = []; // Array to hold character objects
+let arrRelicSets = []; // Array to hold relic sets
 
 // Both validate functions go off of same submit press
 charForm.addEventListener("submit", charValidate); // Character validate
@@ -48,8 +49,8 @@ function charValidate(evt) {
     }
 
     // Character Level Validation
-    const charLvl = charLevelValidate();
-    if (charLvl === false) {
+    const charLvlVal = charLevelValidate();
+    if (charLvlVal === false) {
         evt.returnValue = false;
         return false;
     } else {
@@ -57,17 +58,25 @@ function charValidate(evt) {
     }
 
     // Character Eidolon Validation
-    const charEidolon = charEidolonValidate();
-    if (charEidolon === false) {
+    const charEidolonVal = charEidolonValidate();
+    if (charEidolonVal === false) {
         evt.returnValue = false;
         return false;
     } else {
         charInfoObj.eidolon = charEidolonValidate();
     }
 
-    console.log(charInfoObj);
-    arrCharInfo.push(charInfoObj); // Push Character Object into Character Info Array
-    console.log(arrCharInfo);
+    //console.log(charInfoObj);
+    arrCharacters.push(charInfoObj); // Push Character Object into Character Info Array
+    console.log(arrCharacters);
+
+    // Clear each select/textbox if submission is successful
+    if (charCharacter && charLightCone && charLevel && charEidolon) {
+        charCharacter.selectedIndex = 0;
+        charLightCone.selectedIndex = 0;
+        charLevel.value = '';
+        charEidolon.selectedIndex = 0;
+    }
 }
 
 // Relic Set Validate
@@ -77,12 +86,51 @@ function relicValidate(evt) {
     let charRelicSetInfo = {}; // Character Object Information
 
     // Relic Chest Validation
-    const relicChest = relChestValidate();
-    if (relicChest === false) {
+    const relicChestVal = relChestValidate();
+    if (relicChestVal === false) {
         evt.returnValue = false;
         return false;
     } else {
         charRelicSetInfo.chest = relChestValidate();
+    }
+
+    // Relic Feet Validation
+    const relicFeetVal = relFeetValidate();
+    if (relicFeetVal === false) {
+        evt.returnValue = false;
+        return false;
+    } else {
+        charRelicSetInfo.feet = relFeetValidate();
+    }
+
+    // Relic Sphere Validation
+    const relicSphereVal = relSphereValidate();
+    if (relicSphereVal === false) {
+        evt.returnValue = false;
+        return false;
+    } else {
+        charRelicSetInfo.sphere = relSphereValidate();
+    }
+
+    // Relic Rope Validation
+    const relicRopeVal = relRopeValidate();
+    if (relicRopeVal === false) {
+        evt.returnValue = false;
+        return false;
+    } else {
+        charRelicSetInfo.rope = relRopeValidate();
+    }
+
+    //console.log(charRelicSetInfo);
+    arrRelicSets.push(charRelicSetInfo); // Push Character Object into Character Info Array
+    console.log(arrRelicSets);
+
+    // Clear each select/textbox if submission is successful
+    if (relicChestVal && relicFeetVal && relicSphereVal && relicRopeVal) {
+        relicChest.selectedIndex = 0;
+        relicFeet.selectedIndex = 0;
+        relicSphere.selectedIndex = 0;
+        relicRope.selectedIndex = 0;
     }
 }
 
@@ -94,7 +142,7 @@ function charSelectValidate() {
     let charSelectElement = document.getElementById('character-select');
     let output = charSelectElement.options[charSelectElement.selectedIndex].value;
 
-    if (output === ''){
+    if (output === '') {
         alert("Please select a character.");
         charLevel.focus();
         return false;
@@ -104,11 +152,11 @@ function charSelectValidate() {
 }
 
 // Light Cone Selection Validate
-function lightConeSelectValidate(){
+function lightConeSelectValidate() {
     let selectedElement = charLightCone;
     let output = selectedElement.options[selectedElement.selectedIndex].textContent;
 
-    if (output === ''){
+    if (output === '') {
         alert("Please select a light cone.");
         charLevel.focus();
         return false;
@@ -119,7 +167,7 @@ function lightConeSelectValidate(){
 
 // Character Level Validate
 function charLevelValidate() {
-    if (charLevel.value === ""){
+    if (charLevel.value === "") {
         alert("Please enter your characters level");
         charLevel.focus();
         return false;
@@ -127,7 +175,7 @@ function charLevelValidate() {
         alert("Maximum level is 80.");
         charLevel.focus();
         return false;
-    } else if (parseInt(charLevel.value) <= 0){
+    } else if (parseInt(charLevel.value) <= 0) {
         alert("Minimum level is 1.");
         charLevel.focus();
         return false;
@@ -151,7 +199,7 @@ function relChestValidate() {
     let selectedElement = relicChest;
     let output = selectedElement.options[selectedElement.selectedIndex].value;
 
-    if (output === ''){
+    if (output === '') {
         alert("Please select a chest main stat.");
         charLevel.focus();
         return false;
@@ -162,17 +210,44 @@ function relChestValidate() {
 
 // Relic Feet Validate
 function relFeetValidate() {
-    
+    let selectedElement = relicFeet;
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
+
+    if (output === '') {
+        alert("Please select a feet main stat.");
+        charLevel.focus();
+        return false;
+    }
+
+    return output;
 }
 
 // Relic Sphere Validate
 function relSphereValidate() {
-    
+    let selectedElement = relicSphere;
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
+
+    if (output === '') {
+        alert("Please select a sphere main stat.");
+        charLevel.focus();
+        return false;
+    }
+
+    return output;
 }
 
 // Relic Rope Validate
 function relRopeValidate() {
-    
+    let selectedElement = relicRope;
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
+
+    if (output === '') {
+        alert("Please select a rope main stat.");
+        charLevel.focus();
+        return false;
+    }
+
+    return output;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -187,3 +262,4 @@ function alert(msg) {
         errorEl.style.display = "none";
     }, 3000);
 }
+
