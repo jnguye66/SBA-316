@@ -9,12 +9,12 @@ const charEidolon = charForm.elements[3];
 // Relic and Stat Option Validation
 const relicForm = document.getElementById("relics");
 //console.log(relicForm.elements)
-const relicHead = relicForm.elements["#head"];
-const relicHands = relicForm.elements["#hands"];
-const relicChest = relicForm.elements["#chest"];
-const relicFeet = relicForm.elements["#feet"];
-const relicSphere = relicForm.elements["#sphere"];
-const relicRope = relicForm.elements["#rope"];
+const relicHead = relicForm.elements[0];
+const relicHands = relicForm.elements[1];
+const relicChest = relicForm.elements[2];
+const relicFeet = relicForm.elements[3];
+const relicSphere = relicForm.elements[4];
+const relicRope = relicForm.elements[5];
 
 let arrCharInfo = []; // Array to hold character objects
 
@@ -31,7 +31,6 @@ function charValidate(evt) {
 
     // Character Selection Validation
     const charVal = charSelectValidate();
-    console.log(charVal)
     if (charVal === false) {
         evt.returnValue = false;
         return false;
@@ -39,6 +38,13 @@ function charValidate(evt) {
         charInfoObj.character = charSelectValidate();
     }
 
+    const lightConeVal = lightConeSelectValidate();
+    if (lightConeVal === false) {
+        evt.returnValue = false;
+        return false;
+    } else {
+        charInfoObj.lightCone = lightConeSelectValidate();
+    }
 
     // Character Level Validation
     const charLvl = charLevelValidate();
@@ -64,8 +70,14 @@ function charValidate(evt) {
 
 // Character Selection Validate
 function charSelectValidate() {
-    let selectedElement = document.getElementById('character-select');
-    let output = selectedElement.options[selectedElement.selectedIndex].value;
+    let charSelectElement = document.getElementById('character-select');
+    let output = charSelectElement.options[charSelectElement.selectedIndex].value;
+
+    if (output === ''){
+        alert("Please select a character.");
+        charLevel.focus();
+        return false;
+    }
 
     return output;
 }
@@ -74,7 +86,19 @@ function charSelectValidate() {
 // console.log(selectedElement) // Logs character-select 
 // console.log(output) // Outputs option 1's value, which is acheron
 
+// Light Cone Selection Validate
+function lightConeSelectValidate(){
+    let selectedElement = charLightCone;
+    let output = selectedElement.options[selectedElement.selectedIndex].value;
 
+    if (output === ''){
+        alert("Please select a light cone.");
+        charLevel.focus();
+        return false;
+    }
+
+    return output;
+}
 
 
 // Char Level Validate
