@@ -1,9 +1,15 @@
 html * {
     font-family: sans-serif;
+    color: peachpuff;
+}
+
+body {
+    background-color: #12121d;
 }
 
 select {
     margin-bottom: 8px;
+    background: #12121d;
 }
 
 #level {

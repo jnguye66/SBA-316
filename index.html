@@ -13,7 +13,7 @@
     <h1 style="text-align: center;">Honkai: Star Rail Character Builder</h1>
     <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
         <!-- Character Form -->
-        <form id="character" style="width: 40vw;">
+        <form id="character" style="width: 40vw; background-color: #363658; border-radius: 25px; text-align: center;">
             <h2>Character Options</h2>
             <div style="width: 230px;">
                 <label for="character-select" style="text-decoration: underline;">Character:</label>
@@ -33,7 +33,7 @@
                 </select>
 
                 <label for="level" style="text-decoration: underline">Level:</label>
-                <input type="text" id="level" name="level" style="width: 192px;">
+                <input type="text" id="level" name="level" style="width: 192px; background-color: #12121d;">
 
                 <label for="eidolon" style="text-decoration: underline">Eidolon:</label>
                 <select name="eidolon" id="eidolon" style="width: 42px;">
@@ -46,15 +46,15 @@
                     <option value="e6">E6</option>
                 </select>
                 <br>
-                <input type="submit" value="Submit" style="margin-top:25px;">
+                <input type="submit" value="Submit" style="margin-top:32px; background: #24243b; box-shadow: 1;">
             </div>
         </form>
 
 
         <!-- Relic Set Form -->
-        <form id="relics" style="width: 40vw;">
+        <form id="relics" style="width: 40vw; background-color: #363658; border-radius: 25px; text-align: center;">
             <h2>Relic & Stats Options</h2>
-            <div style="width: 230px;">
+            <div style="width: 230px; ">
                 <div id="main-stats">
                     <label for="chest" style="text-decoration: underline">Chest:</label>
                     <select name="chest" id="chest" style="width: 200px;">
@@ -103,14 +103,15 @@
                     </select>
                 </div>
             </div>
-            <input type="submit" value="Submit" style="margin-top:25px;">
+            <input type="submit" value="Submit" style="margin-top:15px; margin-bottom: 10px;background: #24243b; box-shadow: 1;">
         </form>
     </div>
+    <hr>
 
     <!-- Character Output Form -->
     
     <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-        <form id="char-output" style="width: 48vw;">
+        <form id="char-output" style="width: 48vw; background-color: #363658; border-radius: 25px;">
             <h3 style="text-align: center;">Character Stats</h3>
             <div>
                 <template id="char-stats">
@@ -120,7 +121,7 @@
         </form>
 
         <!-- Relic Output Form -->
-        <form id="relic-output" style="width: 48vw;">
+        <form id="relic-output" style="width: 48vw; background-color: #363658; border-radius: 25px;">
             <h3 style="text-align: center;">Relic Stats</h3>
         </form>
     </div>
