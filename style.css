@@ -12,25 +12,24 @@ select {
 
 #char-output {
     display: block;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }
 
 #char-output img {
-    border: solid red 1px;
+    /* border: solid red 1px; */
     float: left;
-    vertical-align: top;
-    max-width: 400px;
-    max-height: 100%;
+    width: 1000px;
     margin-right: 20px;
-}
-
-#char-output h4 {
-    margin-left: 40px;
+    margin-bottom: 300px;
 }
 
 #char-output ul {
     /* border: solid black 1px; */
     list-style: none;
+}
+
+#char-output ul > li {
+    display: block;
 }
 
 #errorDisplay {

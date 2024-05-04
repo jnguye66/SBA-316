@@ -91,6 +91,10 @@ function charValidate(evt) {
     displayStats("Level", charLvlVal);
     displayStats("Eidolons", charEidolonVal);
 
+    if (charEidolonVal === 'E6'){
+        window.confirm('How much money have you spent?');
+    }
+
     // Displays calculated character stats based on level
     displayLevelStats(charLvlVal);
 }
@@ -291,13 +295,13 @@ function displayCharacterImg (character) {
 
     if (character === "Acheron"){
         charImg.src = 'images/acheron_pfp.webp';
-        charImg.style.width = "30%";
+        charImg.style.width = "60%";
     } else if (character === "Black Swan") {
         charImg.src = 'images/black_swan_pfp.webp';
-        charImg.style.width = "30%";
+        charImg.style.width = "60%";
     } else if (character === "Kafka") {
         charImg.src = 'images/kafka_pfp.webp';
-        charImg.style.width = "30%";
+        charImg.style.width = "60%";
     }
     charOutput.appendChild(charImg);
 }
@@ -325,16 +329,16 @@ function displayLevelStats(lvl) {
         } else if (statNames[i] === "Speed"){
             li.textContent = `${stat}: ${(Math.floor(Math.random() * 18) + 92)}`;
         } else if (statNames[i] === "Critical Rate"){
-            li.textContent = `${stat}: ${5}%`;
+            li.textContent = `${stat}: ${(Math.floor(Math.random() * 25) + 50)}%`;
         } else if (statNames[i] === "Critical Damage"){
-            li.textContent = `${stat}: ${50}%`;
+            li.textContent = `${stat}: ${(Math.floor(Math.random() * 60) + 150)}%`;
         } else if (statNames[i] === "Break Effect"){
             li.textContent = `${stat}: ${50}%`;
-        } else if (statNames[i] === "Outgoing Healing Bonus"){
+        } else if (statNames[i] === "Outgoing Healing Boost"){
             li.textContent = `${stat}: ${0}%`;
         } else if (statNames[i] === "Max Energy"){
             li.textContent = `${stat}: ${140}`;
-        } else if (statNames[i] === "Energy Recharge Rate"){
+        } else if (statNames[i] === "Energy Regeneration Rate"){
             li.textContent = `${stat}: ${100}%`;
         } else if (statNames[i] === "Effect Hit Rate"){
             li.textContent = `${stat}: ${65}%`;
@@ -363,4 +367,3 @@ function alert(msg) {
         errorEl.style.display = "none";
     }, 3000);
 }
-
