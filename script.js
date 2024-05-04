@@ -14,6 +14,10 @@ const relicFeet = relicForm.elements[1];
 const relicSphere = relicForm.elements[2];
 const relicRope = relicForm.elements[3];
 
+// Outputs
+
+const relicOutput = document.getElementById("relic-output");
+
 let arrCharacters = []; // Array to hold character objects
 let arrRelicSets = []; // Array to hold relic sets
 
@@ -77,6 +81,14 @@ function charValidate(evt) {
         charLevel.value = '';
         charEidolon.selectedIndex = 0;
     }
+    // Displays inputted user's character image
+    displayCharacterImg(charVal);
+
+    // Displays inputted user's character stats
+    displayCharacterStats("Character", charVal);
+    displayCharacterStats("Light Cone", lightConeVal);
+    displayCharacterStats("Level", charLvlVal);
+    displayCharacterStats("Eidolons", charEidolonVal);
 }
 
 // Relic Set Validate
@@ -140,7 +152,7 @@ function relicValidate(evt) {
 // Character Selection Validate
 function charSelectValidate() {
     let charSelectElement = document.getElementById('character-select');
-    let output = charSelectElement.options[charSelectElement.selectedIndex].value;
+    let output = charSelectElement.options[charSelectElement.selectedIndex].textContent;
 
     if (output === '') {
         alert("Please select a character.");
@@ -186,7 +198,7 @@ function charLevelValidate() {
 // Character Eidolon Validate
 function charEidolonValidate() {
     let selectedElement = charEidolon;
-    let output = selectedElement.options[selectedElement.selectedIndex].value;
+    let output = selectedElement.options[selectedElement.selectedIndex].textContent;
 
     return output;
 }
@@ -249,6 +261,38 @@ function relRopeValidate() {
 
     return output;
 }
+////////////////////////////////////////////////////////////////////////
+// Displaying Character Info Functions
+
+// Uses clone to display inputted character information
+function displayCharacterStats(stat, elem) {
+    const charOutput = document.getElementById("char-output");
+
+    const charTemplate = document.getElementById("char-stats")
+    const clone = charTemplate.content.cloneNode(true);
+
+    const charStat = clone.querySelector('h5');
+
+    charStat.textContent = `${stat}: ${elem}`;
+    
+    charOutput.appendChild(charStat);
+}
+
+// Displays a picture of character inputted
+function displayCharacterImg (character) {
+    const charOutput = document.getElementById("char-output");
+    const charImg = document.createElement('img');
+
+    if (character === "Acheron"){
+        charImg.src = 'images/acheron_pfp.webp';
+    } else if (character === "Black Swan") {
+        charImg.src = 'images/black_swan_pfp.webp';
+    } else if (character === "Kafka") {
+        charImg.src = 'images/kafka_pfp.webp';
+    }
+    charOutput.appendChild(charImg);
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 
