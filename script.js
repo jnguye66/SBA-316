@@ -1,18 +1,18 @@
 // Character Option Validation
 const charForm = document.getElementById("character");
 // console.log(charForm.elements)
-const charCharacter = charForm.elements[0];
-const charLightCone = charForm.elements[1];
-const charLevel = charForm.elements[2];
-const charEidolon = charForm.elements[3];
+const charCharacter = charForm.elements["character-select"];
+const charLightCone = charForm.elements["light-cone-select"];
+const charLevel = charForm.elements["level"];
+const charEidolon = charForm.elements["eidolon"];
 
 // Relic and Stat Option Validation
 const relicForm = document.getElementById("relics");
 //console.log(relicForm.elements)
-const relicChest = relicForm.elements[0];
-const relicFeet = relicForm.elements[1];
-const relicSphere = relicForm.elements[2];
-const relicRope = relicForm.elements[3];
+const relicChest = relicForm.elements["chest"];
+const relicFeet = relicForm.elements["feet"];
+const relicSphere = relicForm.elements["sphere"];
+const relicRope = relicForm.elements["rope"];
 
 // Outputs
 
@@ -42,6 +42,7 @@ function charValidate(evt) {
     } else {
         charInfoObj.character = charSelectValidate();
     }
+    console.log(charVal)
 
     // Light Cone Selection Validation
     const lightConeVal = lightConeSelectValidate();
@@ -85,10 +86,13 @@ function charValidate(evt) {
     displayCharacterImg(charVal);
 
     // Displays inputted user's character stats
-    displayCharacterStats("Character", charVal);
-    displayCharacterStats("Light Cone", lightConeVal);
-    displayCharacterStats("Level", charLvlVal);
-    displayCharacterStats("Eidolons", charEidolonVal);
+    displayStats("Character", charVal);
+    displayStats("Light Cone", lightConeVal);
+    displayStats("Level", charLvlVal);
+    displayStats("Eidolons", charEidolonVal);
+
+    // Displays calculated character stats based on level
+    displayLevelStats(charLvlVal);
 }
 
 // Relic Set Validate
@@ -151,12 +155,12 @@ function relicValidate(evt) {
 
 // Character Selection Validate
 function charSelectValidate() {
-    let charSelectElement = document.getElementById('character-select');
+    let charSelectElement = charCharacter;
     let output = charSelectElement.options[charSelectElement.selectedIndex].textContent;
 
-    if (output === '') {
+    if (output === 'Select a Character') {
         alert("Please select a character.");
-        charLevel.focus();
+        charCharacter.focus();
         return false;
     }
 
@@ -168,9 +172,9 @@ function lightConeSelectValidate() {
     let selectedElement = charLightCone;
     let output = selectedElement.options[selectedElement.selectedIndex].textContent;
 
-    if (output === '') {
+    if (output === 'Select a Light Cone') {
         alert("Please select a light cone.");
-        charLevel.focus();
+        charLightCone.focus();
         return false;
     }
 
@@ -213,7 +217,7 @@ function relChestValidate() {
 
     if (output === '') {
         alert("Please select a chest main stat.");
-        charLevel.focus();
+        relicChest.focus();
         return false;
     }
 
@@ -227,7 +231,7 @@ function relFeetValidate() {
 
     if (output === '') {
         alert("Please select a feet main stat.");
-        charLevel.focus();
+        relicFeet.focus();
         return false;
     }
 
@@ -241,7 +245,7 @@ function relSphereValidate() {
 
     if (output === '') {
         alert("Please select a sphere main stat.");
-        charLevel.focus();
+        relicSphere.focus();
         return false;
     }
 
@@ -255,7 +259,7 @@ function relRopeValidate() {
 
     if (output === '') {
         alert("Please select a rope main stat.");
-        charLevel.focus();
+        relicRope.focus();
         return false;
     }
 
@@ -264,18 +268,20 @@ function relRopeValidate() {
 ////////////////////////////////////////////////////////////////////////
 // Displaying Character Info Functions
 
-// Uses clone to display inputted character information
-function displayCharacterStats(stat, elem) {
+// Uses clone to display inputted character/relic information
+function displayStats(stat, elem) {
     const charOutput = document.getElementById("char-output");
 
     const charTemplate = document.getElementById("char-stats")
     const clone = charTemplate.content.cloneNode(true);
 
-    const charStat = clone.querySelector('h5');
+    const charStat = clone.querySelector('h4');
 
-    charStat.textContent = `${stat}: ${elem}`;
+    charStat.innerHTML = `<span>${stat}: </span>${elem}`;
     
     charOutput.appendChild(charStat);
+
+    console.log(charOutput.children);
 }
 
 // Displays a picture of character inputted
@@ -285,14 +291,65 @@ function displayCharacterImg (character) {
 
     if (character === "Acheron"){
         charImg.src = 'images/acheron_pfp.webp';
+        charImg.style.width = "30%";
     } else if (character === "Black Swan") {
         charImg.src = 'images/black_swan_pfp.webp';
+        charImg.style.width = "30%";
     } else if (character === "Kafka") {
         charImg.src = 'images/kafka_pfp.webp';
+        charImg.style.width = "30%";
     }
     charOutput.appendChild(charImg);
 }
 
+// Displays Characters stats at level
+function displayLevelStats(lvl) {
+    const level = lvl;
+
+    const statNames = ["Health", "Defense", "Attack", "Speed", "Critical Rate", "Critical Damage", "Break Effect", "Outgoing Healing Boost", "Max Energy", "Energy Regeneration Rate", "Effect Hit Rate", "Effect Resistance"];
+
+    statNames.forEach((stat, i) => {
+        const form = document.getElementById("char-output");
+        const statList = document.createElement('ul');
+
+        form.appendChild(statList);
+
+        const li = document.createElement('li');
+
+        if (statNames[i] === "Health"){
+            li.textContent = `${stat}: ${(Math.floor(Math.random() * 26) + 40) * lvl}`;
+        } else if (statNames[i] === "Defense"){
+            li.textContent = `${stat}: ${(Math.floor(Math.random() * 6) + 30) * lvl}`;
+        } else if (statNames[i] === "Attack"){
+            li.textContent = `${stat}: ${(Math.floor(Math.random() * 15) + 46) * lvl}`;
+        } else if (statNames[i] === "Speed"){
+            li.textContent = `${stat}: ${(Math.floor(Math.random() * 18) + 92)}`;
+        } else if (statNames[i] === "Critical Rate"){
+            li.textContent = `${stat}: ${5}%`;
+        } else if (statNames[i] === "Critical Damage"){
+            li.textContent = `${stat}: ${50}%`;
+        } else if (statNames[i] === "Break Effect"){
+            li.textContent = `${stat}: ${50}%`;
+        } else if (statNames[i] === "Outgoing Healing Bonus"){
+            li.textContent = `${stat}: ${0}%`;
+        } else if (statNames[i] === "Max Energy"){
+            li.textContent = `${stat}: ${140}`;
+        } else if (statNames[i] === "Energy Recharge Rate"){
+            li.textContent = `${stat}: ${100}%`;
+        } else if (statNames[i] === "Effect Hit Rate"){
+            li.textContent = `${stat}: ${65}%`;
+        } else if (statNames[i] === "Effect Resistance"){
+            li.textContent = `${stat}: ${0}%`;
+        }
+        
+        li.style.marginBottom = '3px';
+        li.style.fontWeight = 'bold';
+
+        statList.appendChild(li);
+    })
+}
+let test = document.getElementById('char-stats').children;
+console.log(test);
 
 ////////////////////////////////////////////////////////////////////////
 
